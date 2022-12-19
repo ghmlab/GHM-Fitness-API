@@ -58,7 +58,8 @@ const registerUser = async (req, res) => {
             email: email,
             phone: phone,
             model: model,
-            date: moment().unix()
+            date: moment().unix(),
+            trips: []
         })
 
         res.send("Welcome to GHM Fitness")
