@@ -59,7 +59,7 @@ const registerUser = async (req, res) => {
             phone: phone,
             model: model,
             date: moment().unix(),
-            trips: []
+            trips:[]
         })
 
         res.send("Welcome to GHM Fitness")
@@ -93,10 +93,81 @@ const loginUser = async (req, res) => {
 
 }
 
+const updateTrips = async (req, res) => {
+    
+    const startTime = req.body.startTime
+    const endTime = req.body.endTime
+    const calories = req.body.calories
+    const distance = req.body.distance
+    const coins = req.body.coins
+    const duration = req.body.duration
+
+    // GETTING USER DATA FROM URL REQUEST PARAMETERS
+    const userData = await fitnessData.findOne({email: req.params.id}, (user) => {
+        
+        if(!user) return res.status(400).send("User not found")
+
+        res.send("user")
+       
+    })
+    
+    // STORING THE TRIPS ARRAY
+    let updateTrip
+    
+    if(userData){
+        updateTrip = userData.trips
+        tripLength = updateTrip.length
+    }
+
+    // PUSHING DATA INTO ARRAY
+    updateTrip.push({
+        date: moment().unix(),
+        startTime: startTime,
+        endTime: endTime,
+        calories: calories,
+        distance: distance,
+        coins: coins,
+        duration: duration
+    })
+    
+
+    // SENDING DATA TO MONGODB SERVER
+    await fitnessData.findOneAndUpdate({email: req.params.id}, {$set: {trips: updateTrip}}).then((updatedData) => {
+        if(updatedData.trips.length < tripLength) return res.status(400).send("Update Failed")
+        
+        res.send("Update Successful")
+
+    })
+    
+}
+
 
 
 module.exports = {
     getAllData,
     registerUser,
-    loginUser
+    loginUser,
+    updateTrips
 }
+
+
+
+
+
+
+/* 
+{
+    "password": "abcdefghi",
+    "email": "ali@gmail.com",
+    "username": "Ali Reza",
+    "phone": "9988776655"
+}
+{
+    "startTime": "fuehfuhf",
+    "endTime" : "ifue",
+    "calories": 55010,
+    "distance": 200,
+    "coins": 20000,
+    "duration": 120
+}
+*/
