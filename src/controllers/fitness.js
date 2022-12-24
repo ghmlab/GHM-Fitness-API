@@ -28,8 +28,8 @@ const getAllData = (req, res) => {
 
 const registerUser = async (req, res) => {
 
-    const {error} = validation.register(req.body)
-    if(error) return res.status(400).send(error.details[0].message)
+    const error = validation.register(req.body)
+    if(error) return res.status(400).send(error)
 
     //Checking if the user already exists
     const emailExists = await fitnessData.findOne({email: req.body.email})
@@ -162,12 +162,5 @@ module.exports = {
     "username": "Ali Reza",
     "phone": "9988776655"
 }
-{
-    "startTime": "fuehfuhf",
-    "endTime" : "ifue",
-    "calories": 55010,
-    "distance": 200,
-    "coins": 20000,
-    "duration": 120
-}
+vc 
 */
