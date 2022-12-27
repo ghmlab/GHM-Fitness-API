@@ -26,6 +26,20 @@ const getAllData = (req, res) => {
     }
 }
 
+//----------------------GET USER BY ID --------------------------------------//
+
+const getUserData = async (req, res) => {
+
+    const user = await fitnessData.findOne({email: req.params.id})
+    
+    if(!user) return res.status(400).send("User not found")
+
+    res.send({
+        success: true,
+        user: user
+    })
+}
+
 //----------------------REGISTER USER--------------------------------------//
 
 const registerUser = async (req, res) => {
@@ -160,7 +174,8 @@ module.exports = {
     getAllData,
     registerUser,
     loginUser,
-    updateTrips
+    updateTrips,
+    getUserData
 }
 
 

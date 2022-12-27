@@ -54,3 +54,8 @@ const postShopData = (req, res) => {
         })
     }
 };
+
+module.exports = {
+    fetchShopData,
+    postShopData
+}
