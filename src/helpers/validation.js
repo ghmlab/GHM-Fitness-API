@@ -1,4 +1,4 @@
-const Joi = require('@hapi/joi')
+ 
 
 const register = (user) => {
     // const validateSchema = Joi.object({
@@ -63,7 +63,7 @@ const login = (user) => {
             error: 'Invalid Email. Please enter the correct email address'
         }
     }
-    
+
     if(user.password.length < 6){
         return{
             error: 'Password length should be minimum 6 characters'

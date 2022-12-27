@@ -69,10 +69,11 @@ const registerUser = async (req, res) => {
     }
 }
 
+//----------------------LOGIN USER --------------------------------------//
 const loginUser = async (req, res) => {
 
     // VALIDATING LOGIN DETAILS
-    const {error} = validation.login(req.body)
+    const error = validation.login(req.body)
     if(error) return res.status(400).send(error.details[0].message)
 
     // CHECKING IF EMAIL EXISTS IN THE DATABASE
@@ -92,6 +93,7 @@ const loginUser = async (req, res) => {
     // res.send("Logged In Successfully")
 
 }
+//----------------------UPDATE TRIPS--------------------------------------//
 
 const updateTrips = async (req, res) => {
     
@@ -140,6 +142,8 @@ const updateTrips = async (req, res) => {
     })
     
 }
+
+
 
 
 
