@@ -61,7 +61,8 @@ const registerUser = async (req, res) => {
             phone: phone,
             model: model,
             date: moment().unix(),
-            trips:[]
+            trips:[],
+            orders: []
         })
 
         res.send({
