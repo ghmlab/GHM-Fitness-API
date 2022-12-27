@@ -1,5 +1,4 @@
 const moment = require('moment');
-const uuid = require('uuid')
 const dotenv = require('dotenv')
 const jwt = require('jsonwebtoken')
 
@@ -16,7 +15,10 @@ const fitnessData = db.get("ghmfitness")
 const getAllData = (req, res) => {
     try{
         fitnessData.find().then((data) => {
-            res.send(data)
+            res.send({
+                success: true,
+                data:data
+            })
         })
     }
     catch(err){
@@ -62,10 +64,13 @@ const registerUser = async (req, res) => {
             trips:[]
         })
 
-        res.send("Welcome to GHM Fitness")
+        res.send({
+            success: true,
+            message: "Welcome to GHM Fitness"
+        })
     }
     catch(err){
-        console.log("ERROR : Couldn't push data", err)
+        res.send("ERROR : Couldn't push data", err)
     }
 }
 
@@ -87,7 +92,10 @@ const loginUser = async (req, res) => {
     // CREATING A JWT TOKEN 
     
     const token = jwt.sign({_id: user._id }, process.env.TOKEN_SECRET)
-    res.header('auth-token', token).send(token)
+    res.header('auth-token', token).send({
+        success: true,
+        token: token
+    })
 
 
     // res.send("Logged In Successfully")
