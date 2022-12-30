@@ -69,11 +69,11 @@ const registerUser = async (req, res) => {
     //Pushing Data to the database
     try{
         fitnessData.insert({
-            username: username,
-            password: password,
-            email: email,
-            phone: phone,
-            model: model,
+            username: username.toString(),
+            password: password.toString(),
+            email: email.toString(),
+            phone: phone.toString(),
+            model: model.toString(),
             date: moment().unix(),
             trips:[],
             orders: []
