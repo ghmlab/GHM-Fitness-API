@@ -94,7 +94,7 @@ const loginUser = async (req, res) => {
 
     // VALIDATING LOGIN DETAILS
     const error = validation.login(req.body)
-    if(error) return res.status(400).send(error.details[0].message)
+    if(error) return res.status(400).send(error)
 
     // CHECKING IF EMAIL EXISTS IN THE DATABASE
     const user = await fitnessData.findOne({email: req.body.email})
